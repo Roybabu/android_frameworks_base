@@ -97,6 +97,10 @@
 
     <string name="def_wireless_charging_started_sound" translatable="false">/system/media/audio/ui/WirelessChargingStarted.ogg</string>
     
-        <!-- Whether the device supports Smart Pixels -->
+    <!-- Whether the device supports Smart Pixels -->
     <bool name="config_enableSmartPixels">false</bool>
+
+    <!-- Whether device has dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
+
 </resources>

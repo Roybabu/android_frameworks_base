@@ -26,4 +26,9 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
+
+    <!-- Status bar notification ticker -->
+    <style name="TextAppearance.StatusBar.PhoneTicker" parent="@*android:style/TextAppearance.StatusBar.Ticker">
+        <item name="android:textSize">14dp</item>
+    </style>
 </resources>

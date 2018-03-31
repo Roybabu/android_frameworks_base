@@ -106,4 +106,44 @@
   <string name="quick_settings_screenrecord_lq_label">Низкое качество</string>
   <string name="quick_settings_screenrecord_mq_label">Среднее качество</string>
   <string name="quick_settings_screenrecord_hq_label">Высокое качество</string>
+  
+  <string name="preview">Предв. просмотр</string>
+  <string name="keycode">Ключевой код</string>
+  <string name="no_home_title">Кнопка /"Домой/" не найдена</string>
+  <string name="no_home_message">Для навигации по этому устройству требуется кнопка /"Домой/". Перед сохранением добавьте кнопку /"Домой/".</string>
+  <string name="clipboard_description">Буфер обмена позволяет перемещать элементы непосредственно в буфер обмена. Элементы также можно перетаскивать непосредственно из буфера обмена, когда они присутствуют.</string>
+  <string name="keycode_description">Ключевой код кнопок позволяют добавлять клавиши клавиатуры в панель навигации. При нажатии они эмулируют выбранную клавишу клавиатуры. Сначала необходимо выбрать ключ для кнопки, а затем изображение, которое будет отображаться на кнопке.</string>
+  <string name="start">Начало</string>
+  <string name="center">Центр</string>
+  <string name="end">Конец</string>
+  <string name="space">Проставка</string>
+  <string name="menu_ime">Меню / Клавиатурный переключатель</string>
+  <string name="select_button">Выберите кнопку дл ядобавления</string>
+  <string name="add_button">Добавить кнопку</string>
+  <string name="save">Сохранить</string>
+  <string name="reset">Сброс</string>
+  <string name="select_keycode">Выбрать кнопку клавиатуры</string>
+  <string name="left">Лево</string>
+  <string name="right">Право</string>
+  <string name="navbar_editor_title">Редактор</string>
+  <string name="navbar_editor_summary">Настройка панели навигации</string>
+  
+  <!-- key disable QS Tile -->
+  <string name="quick_settings_key_disable_label">Отключить клавиши</string>
+  <string name="accessibility_quick_settings_key_disable_on">Клавиши отключены.</string>
+  <string name="accessibility_quick_settings_key_disable_off">Клавиши доступны.</string>
+  <string name="tuner_show_brightness_side_buttons">Показать боковые кнопки слайдера яркости</string>
+   <!-- navbar disable QS Tile -->
+  <string name="quick_settings_navbar_disable_label">Отключить панель навигации</string>
+  <string name="accessibility_quick_settings_navbar_disable_on">Панель навигации отключена</string>
+  <string name="accessibility_quick_settings_navbar_disable_off">Панель навигации включена</string>
+
+  <string name="qs_show_battery">Показать батарею</string>
+  <string name="qs_show_carrier">Показать имя оператора</string>
+  <string name="qs_show_clock">Показать часы</string>
+
+  <!-- Sync QS tile -->
+  <string name="quick_settings_sync_label">Синхронизация</string>
+  <string name="accessibility_quick_settings_sync_changed_off">Синхронизация выкл.</string>
+  <string name="accessibility_quick_settings_sync_changed_on">Синхронизация вкл.</string>
 </resources>

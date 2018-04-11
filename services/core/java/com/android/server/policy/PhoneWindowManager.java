@@ -745,6 +745,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // Behavior of Back button while in-call and screen on
     int mIncallBackBehavior;
 
+    // whether System Navigation Keys are Enabled
+    boolean mSystemNavigationKeysEnabled;
+
     Display mDisplay;
 
     private int mDisplayRotation;
@@ -1114,8 +1117,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.BUTTON_BACK_KILL_ENABLE), false, this,
                     UserHandle.USER_ALL);
-	    resolver.registerContentObserver(Settings.System.getUriFor(
+	        resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.THREE_FINGER_GESTURE), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Global.getUriFor(
+                    Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED), false, this,
                     UserHandle.USER_ALL);
             updateSettings();
         }
@@ -2586,6 +2592,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     Settings.Secure.INCALL_BACK_BUTTON_BEHAVIOR,
                     Settings.Secure.INCALL_BACK_BUTTON_BEHAVIOR_DEFAULT,
                     UserHandle.USER_CURRENT);
+           mSystemNavigationKeysEnabled = Settings.Secure.getIntForUser(resolver,
+                    Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED,
+                    0, UserHandle.USER_CURRENT) == 1;
 
             // Configure wake gesture.
             boolean wakeGestureEnabledSetting = Settings.Secure.getIntForUser(resolver,
@@ -6979,7 +6988,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (event.getAction() == KeyEvent.ACTION_UP) {
             if (!mAccessibilityManager.isEnabled()
                     || !mAccessibilityManager.sendFingerprintGesture(event.getKeyCode())) {
-                if (areSystemNavigationKeysEnabled()) {
+                if (mSystemNavigationKeysEnabled) {
                     sendSystemKeyToStatusBarAsync(event.getKeyCode());
                 }
             }
@@ -8515,11 +8524,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 Settings.Global.THEATER_MODE_ON, 0) == 1;
     }
 
-    private boolean areSystemNavigationKeysEnabled() {
-        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
-    }
-
     @Override
     public boolean performHapticFeedbackLw(WindowState win, int effectId, boolean always) {
         if (!mVibrator.hasVibrator()) {
@@ -9318,7 +9322,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 IStatusBarService service = getStatusBarService();
                 if (service != null) {
                     try {
-                        service.expandNotificationsPanel();
+                        service.togglePanel();
                     } catch (RemoteException e) {
                         // do nothing.
                     }

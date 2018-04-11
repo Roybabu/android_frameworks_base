@@ -4480,7 +4480,13 @@ public final class Settings {
          */
         public static final String STATUSBAR_BATTERY_LOW_COLOR_ENABLE =
                 "statusbar_battery_low_color_enable";
-
+        
+        /**
+         * Three Finger Gesture from Oppo
+         * @hide
+         */
+        public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
+        
         /**
          * Show or hide clock
          * 0 - hide

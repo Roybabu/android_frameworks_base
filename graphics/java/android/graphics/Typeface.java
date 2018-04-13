@@ -113,8 +113,6 @@ public class Typeface {
     static final String FONTS_CONFIG = "fonts.xml";
     static final String SANS_SERIF_FAMILY_NAME = "sans-serif";
 
-    static final String SANS_SERIF_FAMILY_NAME = "sans-serif";
-
     /**
      * @hide
      */
@@ -140,13 +138,6 @@ public class Typeface {
 
     private int[] mSupportedAxes;
     private static final int[] EMPTY_AXES = {};
-    // Typefaces that we can garbage collect when changing fonts, and so we don't break public APIs
-    private static Typeface DEFAULT_INTERNAL;
-    private static Typeface DEFAULT_BOLD_INTERNAL;
-    private static Typeface SANS_SERIF_INTERNAL;
-    private static Typeface SERIF_INTERNAL;
-    private static Typeface MONOSPACE_INTERNAL;
-
     // Typefaces that we can garbage collect when changing fonts, and so we don't break public APIs
     private static Typeface DEFAULT_INTERNAL;
     private static Typeface DEFAULT_BOLD_INTERNAL;

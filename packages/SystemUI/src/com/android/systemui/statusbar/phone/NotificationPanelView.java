@@ -62,6 +62,7 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
+import com.android.systemui.ambientmusic.AmbientIndicationContainer;
 import com.android.systemui.classifier.FalsingManager;
 import com.android.systemui.fragments.FragmentHostManager;
 import com.android.systemui.fragments.FragmentHostManager.FragmentListener;
@@ -493,6 +494,9 @@ public class NotificationPanelView extends PanelView implements
             stackScrollerPadding = (mQs != null ? mQs.getHeader().getHeight() : 0) + mQsPeekHeight;
             mTopPaddingAdjustment = 0;
         } else {
+            AmbientIndicationContainer ambientIndicationContainer = (AmbientIndicationContainer) mStatusBar.getAmbientIndicationContainer();
+            boolean isLandscape = mContext.getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
             mClockPositionAlgorithm.setup(
                     mStatusBar.getMaxKeyguardNotifications(),
                     getMaxPanelHeight(),
@@ -502,7 +506,10 @@ public class NotificationPanelView extends PanelView implements
                     mKeyguardStatusView.getHeight(),
                     mEmptyDragAmount,
                     mKeyguardStatusView.getClockBottom(),
-                    mDarkAmount);
+                    mDarkAmount,
+                    isLandscape,
+                    ambientIndicationContainer.getHeight(),
+                    ambientIndicationContainer.isCleanLayout());
             mClockPositionAlgorithm.run(mClockPositionResult);
             if (animate || mClockAnimator != null) {
                 startClockAnimation(mClockPositionResult.clockX, mClockPositionResult.clockY);
@@ -513,6 +520,7 @@ public class NotificationPanelView extends PanelView implements
             updateClock(mClockPositionResult.clockAlpha, mClockPositionResult.clockScale);
             stackScrollerPadding = mClockPositionResult.stackScrollerPadding;
             mTopPaddingAdjustment = mClockPositionResult.stackScrollerPaddingAdjustment;
+            ambientIndicationContainer.setY(mClockPositionResult.ambientContainerY);
         }
         mNotificationStackScroller.setIntrinsicPadding(stackScrollerPadding);
         mNotificationStackScroller.setDarkShelfOffsetX(mClockPositionResult.clockX);
@@ -1796,10 +1804,6 @@ public class NotificationPanelView extends PanelView implements
         mKeyguardBottomArea.setImportantForAccessibility(alpha == 0f
                 ? IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
                 : IMPORTANT_FOR_ACCESSIBILITY_AUTO);
-        /*View ambientIndicationContainer = mStatusBar.getAmbientIndicationContainer();
-        if (ambientIndicationContainer != null) {
-            ambientIndicationContainer.setAlpha(alpha);
-        }*/
     }
 
     private float getNotificationsTopY() {
